@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keron Thomas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      text-align: center;
+      background: url("https://www.shutterstock.com/image-photo/asphalt-road-square-city-skyline-600nw-2468824567.jpg");
+      background-size: cover;
+      background-position: center;
+      color: #ff5733; 
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    p {
+      font-size: 24px;
+      font-family: 'Bungee', cursive; 
+      background-color: rgba(255, 255, 255, 0.8); 
+      background 
+      display: inline-block;
+      padding: 15px 25px;
+      border-radius: 12px;
+      margin: 20px auto;
+    }
+    input {
+      border: 2px solid #264653;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 5px;
+      margin: 10px 5px;
+      width: 80%;
+      max-width: 300px;
+      font-family: 'Open Sans', sans-serif; 
+    }
+    input::placeholder {
+      font-family: 'Bungee', cursive; 
+      font-size: 16px;
+      color: #6a0572; 
+    }
+    input[type="submit"] {
+      background: #6a0572; 
+      color: #f1c40f; 
+
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    input[type="submit"]:hover {
+      background: #c85cdb;
+      transform: scale(1.05);
+    }
+    img {
+      width: 300px;
+      border-radius: 50%;
+      margin: 20px auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    @media (max-width: 500px) {
+      p {
+        font-size: 20px;
+        padding: 10px;
+      }
+      img {
+        width: 200px;
+      }
+      input {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <img src="https://cdn3d.iconscout.com/3d/premium/preview/robot-say-hi-3d-icon-download-in-png-blend-fbx-gltf-file-formats--saying-hello-device-brain-activity-pack-science-technology-icons-7746773.png?f=webp&h=700" alt="Robot Icon">
+  <p>Hi! I'm Keron, a student at Jamaica Gateway to the Sciences. Say hello!</p>
+  <input id="Name" placeholder="Your name" aria-label="Enter your name">
+  <input id="Email" placeholder="Your email" aria-label="Enter your email">
+  <input id="submit" type ="submit">
+  
+  
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+  
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDOh3y8m6doahGp7kKCumek0vFJ_YmWUiY",
+    authDomain: "project-1-f8492.firebaseapp.com",
+    projectId: "project-1-f8492",
+    storageBucket: "project-1-f8492.firebasestorage.app",
+    messagingSenderId: "1052423423882",
+    appId: "1:1052423423882:web:49fdeaf17a146213e82a73",
+    measurementId: "G-1GW44P72QX"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app) ;
+const Name = document.querySelector("#Name") 
+const Email = document.querySelector("#Email")
+document.querySelector('#submit').addEventListener('click', Submit)
+  
+  
+function Submit() {
+  const timestamp = buildTimestamp()
+  
+  set(ref(db, timestamp), {
+	  Name: Name.value,
+      email: Email.value,
+  });
+
+  Name.value = ""
+  Email.value = ""
+}
+ 
+ 
+ 
+function buildTimestamp() {
+  const now = new Date();
+  let timestamp = now.getFullYear().toString() + "/";
+  //const month = now.toLocaleString('default', { month: 'long' });
+
+  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+  month = month.toString()
+  month = addLeadingZero(month)
+  timestamp += month + "/"; 
+
+  let date = now.getDate().toString()
+  date = addLeadingZero(date)
+  timestamp += date + "/";
+
+  let hours = now.getHours().toString()
+  hours = addLeadingZero(hours)
+  timestamp += hours + ":";
+
+  let minutes = now.getMinutes().toString()
+  minutes = addLeadingZero(minutes)
+  timestamp += minutes + ":";
+
+  let seconds = now.getSeconds().toString()
+  seconds = addLeadingZero(seconds)
+  timestamp += seconds;
+
+  return timestamp
+}
+
+function addLeadingZero(units) {
+	if (units.length < 2) {
+		units = "0" + units
+	}
+	return units
+}
+ 
+</script>
+  
+</body>
+</html>
