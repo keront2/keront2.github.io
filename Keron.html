@@ -78,7 +78,7 @@
   <input id="Name" placeholder="Your name" aria-label="Enter your name">
   <input id="Email" placeholder="Your email" aria-label="Enter your email">
   <input id="submit" type ="submit">
-  
+  <input id="Fact" placeholder="Fact about yourself" aria-label="Enter your fact">
   
 <script type="module">
   // Import the functions you need from the SDKs you need
@@ -105,6 +105,7 @@
   const db = getDatabase(app) ;
 const Name = document.querySelector("#Name") 
 const Email = document.querySelector("#Email")
+const Fact = document.querySelector("#Fact")
 document.querySelector('#submit').addEventListener('click', Submit)
   
   
@@ -114,10 +115,12 @@ function Submit() {
   set(ref(db, timestamp), {
 	  Name: Name.value,
       email: Email.value,
+	  Fact: Fact.value,
   });
 
   Name.value = ""
   Email.value = ""
+  Fact.value = ""
 }
  
  
