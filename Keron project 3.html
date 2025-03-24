@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keron's Diner</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+<style>
+	input {
+		font-size: 22px;
+	}
+	
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0 auto;
+    max-width: 600px;
+    background: #f78;
+    color: #333333;
+  }
+
+  h1 {
+    font-family: 'Pacifico', cursive;
+    text-align: center;
+    font-size: 50px;
+    color: #2b2d42;
+    margin: 20px 0;
+  }
+
+  h2 {
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    font-size: 24px;
+    color: #264;
+    margin: 10px 0 30px 0;
+  }
+
+  div {
+    background: #e9c46a;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    color: #264;
+  }
+
+  .price {
+    color: #e76f;
+    font-weight: bold;
+  }
+
+  .description {
+    display: none; 
+    background: #ff6f61; 
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    color: white; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  }
+
+  .description p {
+    color: #f1c40f; 
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 500px) {
+    h1 {
+      font-size: 40px;
+    }
+
+    h2 {
+      font-size: 18px;
+    }
+
+    div {
+      padding: 15px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+</style>
+</head>
+<body>
+<h1>Keron's Diner</h1>
+<h2>Morning Delights</h2>
+
+<div onclick="toggleDescription(this)">
+
+  <img src="https://www.savingyoudinero.com/wp-content/uploads/2013/05/pancakes-1-720x540.jpeg" alt="Pancakes">
+  	<input class="quantities" type="number" min="0" style="width: 50px"> 
+  <p>Pancakes with Maple Syrup <span class="price">$10</span><br />
+  A stack of fluffy pancakes topped with pure maple syrup and butter.</p>
+  <div class="description"><p>These pancakes are made fresh daily with the finest ingredients, and topped with the best maple syrup for the perfect breakfast experience.</p></div>
+</div>
+
+<div onclick="toggleDescription(this)">
+  <img src="https://www.sweetashoney.co/wp-content/uploads/Omelette-2.jpg" alt="Omelette">
+  <input class="quantities" type="number" min="0" style="width: 50px">
+  <p>Classic Omelette <span class="price">$8</span><br />
+  A three-egg omelette filled with cheese, ham, and vegetables.</p>
+  <div class="description"><p>A savory and hearty omelette, made with farm-fresh eggs and stuffed with cheese, ham, and the finest vegetables.</p> </div>
+</div>
+
+<div onclick="toggleDescription(this)">
+  <img src="https://nutmegsd.com/cdn/shop/files/fruit-bowl.webp?v=1711494045&width=1024" alt="Fruit Bowl">
+  <input class="quantities" type="number" min="0" style="width: 50px">
+  <p>Fresh Fruit Bowl <span class="price">$6</span><br />
+  A mix of seasonal fresh fruits served chilled.</p>
+  <div class="description"><p>Enjoy a refreshing mix of hand-picked, seasonal fruits, perfect for a light and healthy start to your day.</p> </div>
+</div>
+
+<br><br>
+  <input id="Name" placeholder="Your name" aria-label="Enter your name">
+  <input id="Email" placeholder="Your email" aria-label="Enter your email">
+  <input id="submit" type ="submit">
+  <br><br> 
+<script>
+  function toggleDescription(element) {
+    var description = element.querySelector('.description');
+    description.style.display = description.style.display === 'none' || description.style.display === '' ? 'block' : 'none';
+  }
+</script>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+ 
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBLypjzWNw_bM3tsMw5HQHraqrGgJxXKlA",
+    authDomain: "keron-project-3.firebaseapp.com",
+    databaseURL: "https://keron-project-3-default-rtdb.firebaseio.com",
+    projectId: "keron-project-3",
+    storageBucket: "keron-project-3.firebasestorage.app",
+    messagingSenderId: "853955007065",
+    appId: "1:853955007065:web:3eafc8cdc85d2dba551748",
+    measurementId: "G-L7V3HZR90R"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+    const itemsList = ["_Pancakes", "Eggs", "Fruits"]
+  const Name = document.querySelector("#Name") 
+  const Email = document.querySelector("#Email")
+    const quantities = document.querySelectorAll(".quantities") 
+    const prices = document.querySelectorAll(".price")
+  document.querySelector('#submit').addEventListener('click', Submit)
+  
+  
+  function Submit() {
+    const timestamp = buildTimestamp()
+ 
+     let total = 0 
+  	let cart = { }
+  	for  (let i=0; i<quantities.length; i=i+1) {
+  	  if (quantities[i].value != "0" && quantities[i].value != "") {
+		let price = prices[i].innerHTML.replace('$', '')
+		total = total + quantities[i].value * price 
+		  
+		  	
+  	    cart[itemsList[i]] = parseInt(quantities[i].value) 
+  	  }
+  	  quantities[i].value = ""
+  	}
+ 
+ 
+ 
+    set(ref(db, timestamp), {
+  	  Name: Name.value,
+        email: Email.value,
+			  cart: cart,
+      totalPrice: total,
+      paid: "not yet",
+		
+    });
+
+    Name.value = ""
+    Email.value = ""
+  }
+ 
+ 
+ 
+  function buildTimestamp() {
+    const now = new Date();
+    let timestamp = now.getFullYear().toString() + "/";
+    //const month = now.toLocaleString('default', { month: 'long' });
+
+    let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+    month = month.toString()
+    month = addLeadingZero(month)
+    timestamp += month + "/"; 
+
+    let date = now.getDate().toString()
+    date = addLeadingZero(date)
+    timestamp += date + "/";
+
+    let hours = now.getHours().toString()
+    hours = addLeadingZero(hours)
+    timestamp += hours + ":";
+
+    let minutes = now.getMinutes().toString()
+    minutes = addLeadingZero(minutes)
+    timestamp += minutes + ":";
+
+    let seconds = now.getSeconds().toString()
+    seconds = addLeadingZero(seconds)
+    timestamp += seconds;
+
+    return timestamp
+  }
+
+  function addLeadingZero(units) {
+  	if (units.length < 2) {
+  		units = "0" + units
+  	}
+  	return units
+  }
+</script>
+
+
+
+</body>
+</html>
