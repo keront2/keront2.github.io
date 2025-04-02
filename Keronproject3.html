@@ -132,6 +132,15 @@
   <div class="description"><p>Enjoy a refreshing mix of hand-picked, seasonal fruits, perfect for a light and healthy start to your day.</p> </div>
 </div>
 
+<div onclick="toggleDescription(this)">
+
+  <img src="https://preppykitchen.com/wp-content/uploads/2023/10/Waffle-Recipe-Recipe-Card-500x500.jpg" alt="Waffles">
+  	<input class="quantities" type="number" min="0" style="width: 50px"> 
+  <p>Waffles<span class="price">$10</span><br />
+  A stack of fluffy waffles topped with pure maple syrup and butter.</p>
+  <div class="description"><p>These Waffles are made fresh daily with the finest ingredients, and topped with the best maple syrup for the perfect breakfast experience.</p></div>
+</div>
+
 <br><br>
   <input id="Name" placeholder="Your name" aria-label="Enter your name">
   <input id="Email" placeholder="Your email" aria-label="Enter your email">
@@ -168,7 +177,7 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
-    const itemsList = ["_Pancakes", "Eggs", "Fruits"]
+    const itemsList = ["_Pancakes", "Eggs", "Fruits", "Waffles"]
   const Name = document.querySelector("#Name") 
   const Email = document.querySelector("#Email")
     const quantities = document.querySelectorAll(".quantities") 
